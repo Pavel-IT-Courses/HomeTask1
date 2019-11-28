@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="start">#000000</color>
+    <color name="mid">#DD0000</color>
+    <color name="end">#FFCE00</color>
+</resources>
