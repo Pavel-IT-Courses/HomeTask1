@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -23,6 +24,7 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
     private Toolbar toolbar;
     private SearchView searchView;
     private Button next;
+    private TextView initText;
 
 
     @Override
@@ -34,6 +36,8 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.requestFocus();
+
+        initText = findViewById(R.id.initial_text);
 
         searchView = findViewById(R.id.search);
 
