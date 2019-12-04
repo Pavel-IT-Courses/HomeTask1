@@ -9,30 +9,47 @@
     tools:context=".ContactBookActivity">
 
     <include
-        layout="@layout/toolbar_search"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_search" />
 
     <LinearLayout
+        android:id="@+id/inner_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/inner_layout">
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingVertical="12dp"
+            >
+
+            <include
+                android:id="@+id/grid"
+                layout="@layout/grid" />
+
+        </ScrollView>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/initial_text"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="5"
-            android:text="@string/empty"/>
-
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:id="@+id/next"
-                android:layout_weight="1"
-                android:text="next"/>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/empty" />
 
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/add_person" />
 
     </LinearLayout>
+
 
 </LinearLayout>
