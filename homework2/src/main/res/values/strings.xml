@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Three Tasks</string>
-    <string name="first">To Contact Book</string>
-    <string name="second">To Customized View</string>
-    <string name="third">To Web Browser</string>
+    <string name="first">Contact Book</string>
+    <string name="second">Customized View</string>
+    <string name="third">Web Browser</string>
     <string name="empty">No contacts. Please add</string>
+    <string name="search">Search Contacts</string>
 </resources>
