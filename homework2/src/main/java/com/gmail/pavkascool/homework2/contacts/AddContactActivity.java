@@ -1,4 +1,4 @@
-package com.gmail.pavkascool.homework2;
+package com.gmail.pavkascool.homework2.contacts;
 
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +7,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.gmail.pavkascool.homework2.R;
+import com.gmail.pavkascool.homework2.contacts.ContactBookActivity;
+import com.gmail.pavkascool.homework2.contacts.Person;
+
 import androidx.appcompat.widget.Toolbar;
 
 public class AddContactActivity extends AppCompatActivity implements View.OnClickListener {

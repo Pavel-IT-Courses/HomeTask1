@@ -1,4 +1,4 @@
-package com.gmail.pavkascool.homework2;
+package com.gmail.pavkascool.homework2.contacts;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.gmail.pavkascool.homework2.R;
+
 import androidx.appcompat.widget.Toolbar;
 
 public class EditContactActivity extends AppCompatActivity implements View.OnClickListener {
@@ -19,8 +22,9 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
     private ImageButton saveButton;
     private TextView toolText;
     private Toolbar toolbar;
-    private EditText editName;
+    private EditText editName, editPhone;
     private Button removeButton;
+    private TextView contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +41,10 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setTitle("");
         toolText.setText("Edit Contact");
         editName = findViewById(R.id.edit_name);
+        editPhone = findViewById(R.id.edit_phone);
         removeButton = findViewById(R.id.remove);
         removeButton.setOnClickListener(this);
+        contact = findViewById(R.id.contact);
 
         Intent intent = getIntent();
         int index = intent.getIntExtra("index", -1);
@@ -50,6 +56,14 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
             endPerson.setEmail((startPerson.getEmail()));
         }
         editName.setText(endPerson.getName());
+        if(startPerson.getPhone() != null && !startPerson.getName().isEmpty()) {
+            contact.setText(R.string.phone);
+            editPhone.setText(startPerson.getPhone());
+        }
+        else {
+            contact.setText(R.string.email);
+            editPhone.setText(startPerson.getEmail());
+        }
 
     }
 
@@ -62,6 +76,13 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
             case R.id.save:
                 String name = editName.getText().toString();
                 endPerson.setName(name);
+                String info = editPhone.getText().toString();
+                if(contact.getText().toString() == getString(R.string.phone)) {
+                    endPerson.setPhone(info);
+                }
+                else {
+                    endPerson.setEmail(info);
+                }
                 ContactBookActivity.persons.remove(startPerson);
                 ContactBookActivity.persons.add(endPerson);
                 finish();

@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.gmail.pavkascool.homework2.contacts.ContactBookActivity;
+import com.gmail.pavkascool.homework2.view.CustomizedViewActivity;
+import com.gmail.pavkascool.homework2.web.WebBrowserActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonTel, buttonView, buttonWeb;
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, CustomizedViewActivity.class);
                 break;
             case R.id.button_web:
+                intent = new Intent(this, WebBrowserActivity.class);
                 break;
         }
         startActivity(intent);

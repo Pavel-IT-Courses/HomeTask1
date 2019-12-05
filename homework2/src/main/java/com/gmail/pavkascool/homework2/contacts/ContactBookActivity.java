@@ -1,4 +1,4 @@
-package com.gmail.pavkascool.homework2;
+package com.gmail.pavkascool.homework2.contacts;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import android.os.Bundle;
+
+import com.gmail.pavkascool.homework2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.gmail.pavkascool.homework2;
+package com.gmail.pavkascool.homework2.contacts;
 
 public class Person {
     private String name;
