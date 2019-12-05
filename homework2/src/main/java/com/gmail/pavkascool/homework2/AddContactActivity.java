@@ -1,6 +1,7 @@
 package com.gmail.pavkascool.homework2;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +18,12 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
     private TextView toolText;
     private Toolbar toolbar;
 
+    private EditText editName, editPhone, editEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_contact);
+        setContentView(R.layout.activity_add_contact);
 
         backButton = findViewById(R.id.back);
         backButton.setOnClickListener(this);
@@ -31,6 +34,9 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         toolText.setText("Add Contact");
+        editName = findViewById(R.id.edit_name);
+        editPhone = findViewById(R.id.edit_phone);
+        editEmail = findViewById(R.id.edit_email);
     }
 
     @Override
@@ -40,6 +46,12 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.save:
+                endPerson = new Person();
+                endPerson.setName(editName.getText().toString());
+                endPerson.setPhone(editPhone.getText().toString());
+                endPerson.setEmail(editEmail.getText().toString());
+                ContactBookActivity.persons.add(endPerson);
+                finish();
                 break;
         }
     }

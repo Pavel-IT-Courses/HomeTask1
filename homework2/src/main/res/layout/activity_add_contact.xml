@@ -17,7 +17,24 @@
             android:orientation="vertical"
             android:id="@+id/inner_layout">
 
-
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="Name:"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_name"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="Phone:"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_phone"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="E-Mail:"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_email"/>
 
     </LinearLayout>
 

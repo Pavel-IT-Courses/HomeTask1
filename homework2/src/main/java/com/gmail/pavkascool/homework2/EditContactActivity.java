@@ -1,7 +1,9 @@
 package com.gmail.pavkascool.homework2;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
     private ImageButton saveButton;
     private TextView toolText;
     private Toolbar toolbar;
+    private EditText editName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,19 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         toolText.setText("Edit Contact");
+        editName = findViewById(R.id.edit_name);
+
+        Intent intent = getIntent();
+        int index = intent.getIntExtra("index", -1);
+        if (index >= 0) {
+            startPerson = ContactBookActivity.persons.get(index);
+            endPerson = new Person();
+            endPerson.setName((startPerson.getName()));
+            endPerson.setPhone((startPerson.getPhone()));
+            endPerson.setEmail((startPerson.getEmail()));
+        }
+        editName.setText(endPerson.getName());
+
     }
 
     @Override
@@ -39,10 +55,13 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         switch(v.getId()) {
             case R.id.back:
                 onBackPressed();
-                System.out.println("Back Clicked!");
                 break;
             case R.id.save:
-                System.out.println("Save Clicked!");
+                String name = editName.getText().toString();
+                endPerson.setName(name);
+                ContactBookActivity.persons.remove(startPerson);
+                ContactBookActivity.persons.add(endPerson);
+                finish();
                 break;
         }
     }

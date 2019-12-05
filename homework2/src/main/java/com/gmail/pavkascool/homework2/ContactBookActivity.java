@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ContactBookActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static List<Person> persons;
+    public static List<Person> persons = new ArrayList<>();
 
     private Toolbar toolbar;
     private SearchView searchView;
@@ -46,8 +46,11 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
         searchView = findViewById(R.id.search);
 
-        persons = new ArrayList<>();
-        Person p = new Person("Michael Zawacki", "66666666");
+        gridLayout = findViewById(R.id.grid);
+
+        linearLayout = findViewById(R.id.inner_layout);
+
+        /*Person p = new Person("Michael Zawacki", "66666666");
         persons.add(p);
         Person p1 = new Person("John LaSalle", "1111111111111");
         persons.add(p1);
@@ -86,10 +89,47 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
             item.setOnClickListener(this);
             gridLayout.addView(item);
 
-        }
+        }*/
 
         floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        LayoutInflater li = getLayoutInflater();
+
+        if(persons.size() > 0) {
+            linearLayout.removeView(initText);
+        }
+        else {
+
+        }
+        for(int i = 0; i < persons.size(); i++) {
+            String name = persons.get(i).getName();
+            String phone = persons.get(i).getPhone();
+            String email = persons.get(i).getEmail();
+            View item = null;
+            if(phone != null) {
+                item = li.inflate(R.layout.item_phone, gridLayout, false);
+                TextView phoneText = item.findViewById(R.id.phone);
+                phoneText.setText(phone);
+            }
+            else {
+                item = li.inflate(R.layout.item_email, gridLayout, false);
+                TextView emailText = item.findViewById(R.id.email);
+                emailText.setText(email);
+            }
+
+            TextView nameText = item.findViewById(R.id.name);
+            nameText.setText(name);
+            item.setId(i);
+            item.setOnClickListener(this);
+            gridLayout.addView(item);
+
+        }
     }
 
     @Override
