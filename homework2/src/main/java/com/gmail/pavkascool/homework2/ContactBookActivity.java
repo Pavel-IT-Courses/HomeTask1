@@ -50,46 +50,6 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
         linearLayout = findViewById(R.id.inner_layout);
 
-        /*Person p = new Person("Michael Zawacki", "66666666");
-        persons.add(p);
-        Person p1 = new Person("John LaSalle", "1111111111111");
-        persons.add(p1);
-        Person p2 =new Person("Paul Kassitchev", "ww@ghn.com", null);
-        persons.add(p2);
-
-
-        linearLayout = findViewById(R.id.inner_layout);
-        gridLayout = findViewById(R.id.grid);
-
-        LayoutInflater li = getLayoutInflater();
-
-        if(persons.size() > 0) {
-            linearLayout.removeView(initText);
-        }
-
-        for(int i = 0; i < persons.size(); i++) {
-            String name = persons.get(i).getName();
-            String phone = persons.get(i).getPhone();
-            String email = persons.get(i).getEmail();
-            View item = null;
-            if(phone != null) {
-                item = li.inflate(R.layout.item_phone, gridLayout, false);
-                TextView phoneText = item.findViewById(R.id.phone);
-                phoneText.setText(phone);
-            }
-            else {
-                item = li.inflate(R.layout.item_email, gridLayout, false);
-                TextView emailText = item.findViewById(R.id.email);
-                emailText.setText(email);
-            }
-
-            TextView nameText = item.findViewById(R.id.name);
-            nameText.setText(name);
-            item.setId(i);
-            item.setOnClickListener(this);
-            gridLayout.addView(item);
-
-        }*/
 
         floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
@@ -103,31 +63,32 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
         if(persons.size() > 0) {
             linearLayout.removeView(initText);
+            gridLayout.removeAllViews();
+            for (int i = 0; i < persons.size(); i++) {
+                String name = persons.get(i).getName();
+                String phone = persons.get(i).getPhone();
+                String email = persons.get(i).getEmail();
+                View item = null;
+                if (phone != null && !phone.isEmpty()) {
+                    item = li.inflate(R.layout.item_phone, gridLayout, false);
+                    TextView phoneText = item.findViewById(R.id.phone);
+                    phoneText.setText(phone);
+                } else {
+                    item = li.inflate(R.layout.item_email, gridLayout, false);
+                    TextView emailText = item.findViewById(R.id.email);
+                    emailText.setText(email);
+                }
+
+                TextView nameText = item.findViewById(R.id.name);
+                nameText.setText(name);
+                item.setId(i);
+                item.setOnClickListener(this);
+                gridLayout.addView(item);
+
+            }
         }
         else {
-
-        }
-        for(int i = 0; i < persons.size(); i++) {
-            String name = persons.get(i).getName();
-            String phone = persons.get(i).getPhone();
-            String email = persons.get(i).getEmail();
-            View item = null;
-            if(phone != null) {
-                item = li.inflate(R.layout.item_phone, gridLayout, false);
-                TextView phoneText = item.findViewById(R.id.phone);
-                phoneText.setText(phone);
-            }
-            else {
-                item = li.inflate(R.layout.item_email, gridLayout, false);
-                TextView emailText = item.findViewById(R.id.email);
-                emailText.setText(email);
-            }
-
-            TextView nameText = item.findViewById(R.id.name);
-            nameText.setText(name);
-            item.setId(i);
-            item.setOnClickListener(this);
-            gridLayout.addView(item);
+            gridLayout.removeAllViews();
 
         }
     }

@@ -5,4 +5,7 @@
     <string name="third">Web Browser</string>
     <string name="empty">No contacts. Please add</string>
     <string name="search">Search Contacts</string>
+    <string name="remove">REMOVE</string>
+    <string name="phone">Phone:</string>
+    <string name="email">E-Mail:</string>
 </resources>

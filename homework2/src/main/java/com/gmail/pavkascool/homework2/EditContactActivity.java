@@ -20,6 +20,7 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
     private TextView toolText;
     private Toolbar toolbar;
     private EditText editName;
+    private Button removeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setTitle("");
         toolText.setText("Edit Contact");
         editName = findViewById(R.id.edit_name);
+        removeButton = findViewById(R.id.remove);
+        removeButton.setOnClickListener(this);
 
         Intent intent = getIntent();
         int index = intent.getIntExtra("index", -1);
@@ -61,6 +64,10 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
                 endPerson.setName(name);
                 ContactBookActivity.persons.remove(startPerson);
                 ContactBookActivity.persons.add(endPerson);
+                finish();
+                break;
+            case R.id.remove:
+                ContactBookActivity.persons.remove(startPerson);
                 finish();
                 break;
         }

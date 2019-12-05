@@ -1,41 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".EditContactActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditContactActivity">
 
     <include
-            layout="@layout/toolbar_edit"
-            android:id="@+id/toolbar_edit"/>
+        android:id="@+id/toolbar_edit"
+        layout="@layout/toolbar_edit" />
+
+    <include
+        android:id="@+id/radio"
+        layout="@layout/radio"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        />
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/inner_layout">
+        android:id="@+id/inner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:text="Name:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name:" />
+
         <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_name"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:text="Phone:"/>
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tel_mail"
+            android:text="@string/phone" />
+
         <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_phone"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:text="E-Mail:"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_email"/>
+            android:id="@+id/edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
+
 
 </LinearLayout>

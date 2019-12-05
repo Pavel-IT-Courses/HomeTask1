@@ -3,6 +3,7 @@ package com.gmail.pavkascool.homework2;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +16,11 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
     private ImageButton backButton;
     private ImageButton saveButton;
-    private TextView toolText;
+    private TextView toolText, telOrMail;
     private Toolbar toolbar;
 
-    private EditText editName, editPhone, editEmail;
+    private EditText editName, editPhone;
+    private RadioButton tel, mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,15 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         toolText.setText("Add Contact");
         editName = findViewById(R.id.edit_name);
         editPhone = findViewById(R.id.edit_phone);
-        editEmail = findViewById(R.id.edit_email);
+        telOrMail = findViewById(R.id.tel_mail);
+        /*View radio = findViewById(R.id.radio);
+        tel = radio.findViewById(R.id.tel);
+        mail = radio.findViewById(R.id.mail);*/
+        tel = findViewById(R.id.tel);
+        tel.setOnClickListener(this);
+        mail = findViewById(R.id.mail);
+        mail.setOnClickListener(this);
+
     }
 
     @Override
@@ -48,10 +58,20 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
             case R.id.save:
                 endPerson = new Person();
                 endPerson.setName(editName.getText().toString());
-                endPerson.setPhone(editPhone.getText().toString());
-                endPerson.setEmail(editEmail.getText().toString());
+                if(tel.isChecked()) {
+                    endPerson.setPhone(editPhone.getText().toString());
+                }
+                else {
+                    endPerson.setEmail(editPhone.getText().toString());
+                }
                 ContactBookActivity.persons.add(endPerson);
                 finish();
+                break;
+            case R.id.tel:
+                telOrMail.setText(R.string.phone);
+                break;
+            case R.id.mail:
+                telOrMail.setText(R.string.email);
                 break;
         }
     }
