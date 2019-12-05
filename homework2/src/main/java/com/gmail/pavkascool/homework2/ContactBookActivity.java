@@ -82,7 +82,9 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
             TextView nameText = item.findViewById(R.id.name);
             nameText.setText(name);
-            gridLayout.addView(item, i);
+            item.setId(i);
+            item.setOnClickListener(this);
+            gridLayout.addView(item);
 
         }
 
@@ -97,7 +99,16 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, EditContactActivity.class);
-        startActivity(intent);
+        Intent intent = null;
+        if(v.getId() == R.id.fab) {
+            intent = new Intent(this, AddContactActivity.class);
+            startActivity(intent);
+        }
+        else {
+            int index = v.getId();
+            intent = new Intent(this, EditContactActivity.class);
+            intent.putExtra("index", index);
+            startActivity(intent);
+        }
     }
 }
