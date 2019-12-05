@@ -27,7 +27,9 @@
 
             <include
                 android:id="@+id/grid"
-                layout="@layout/grid" />
+                layout="@layout/grid"
+
+            />
 
         </ScrollView>
 

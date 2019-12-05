@@ -1,11 +1,8 @@
 package com.gmail.pavkascool.homework2;
 
-import android.app.Service;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import android.os.Bundle;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +24,12 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
     private Toolbar toolbar;
     private SearchView searchView;
-    private com.google.android.material.floatingactionbutton.FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingActionButton;
     private TextView initText;
     private GridLayout gridLayout;
     LinearLayout linearLayout;
+
+
 
 
     @Override
@@ -51,6 +51,8 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
         persons.add(p);
         Person p1 = new Person("John LaSalle", "1111111111111");
         persons.add(p1);
+        Person p2 =new Person("Paul Kassitchev", "ww@ghn.com", null);
+        persons.add(p2);
 
 
         linearLayout = findViewById(R.id.inner_layout);
@@ -63,11 +65,23 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
         }
 
         for(int i = 0; i < persons.size(); i++) {
-            View item = li.inflate(R.layout.item_person, gridLayout, false);
-            TextView name = item.findViewById(R.id.name);
-            TextView phone = item.findViewById(R.id.phone);
-            name.setText(persons.get(i).getName());
-            phone.setText(persons.get(i).getPhone());
+            String name = persons.get(i).getName();
+            String phone = persons.get(i).getPhone();
+            String email = persons.get(i).getEmail();
+            View item = null;
+            if(phone != null) {
+                item = li.inflate(R.layout.item_phone, gridLayout, false);
+                TextView phoneText = item.findViewById(R.id.phone);
+                phoneText.setText(phone);
+            }
+            else {
+                item = li.inflate(R.layout.item_email, gridLayout, false);
+                TextView emailText = item.findViewById(R.id.email);
+                emailText.setText(email);
+            }
+
+            TextView nameText = item.findViewById(R.id.name);
+            nameText.setText(name);
             gridLayout.addView(item, i);
 
         }
