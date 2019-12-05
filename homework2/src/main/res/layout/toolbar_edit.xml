@@ -10,11 +10,29 @@
                                    style="@style/Toolbar"
                                    android:orientation="horizontal"
                                    android:focusableInTouchMode="true">
-    <Button
+    <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/back"
             android:gravity="start"
-            android:text="back"/>
+            android:src="@drawable/menu_back"
+            android:background="@color/colorPrimary"
+    />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/action"
+            android:background="@color/colorPrimary"
+            android:textAppearance="@style/Toolbar.TitleText"
+    />
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/save"
+            android:gravity="end"
+            android:src="@drawable/menu_save"
+            android:background="@color/colorPrimary"
+    />
 
 </androidx.appcompat.widget.Toolbar>

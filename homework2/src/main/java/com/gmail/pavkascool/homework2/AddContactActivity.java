@@ -1,14 +1,13 @@
 package com.gmail.pavkascool.homework2;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
-public class EditContactActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddContactActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Person startPerson;
     private Person endPerson;
@@ -31,7 +30,7 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         toolbar = findViewById(R.id.toolbar_edit);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        toolText.setText("Edit Contact");
+        toolText.setText("Add Contact");
     }
 
     @Override
@@ -39,10 +38,8 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         switch(v.getId()) {
             case R.id.back:
                 onBackPressed();
-                System.out.println("Back Clicked!");
                 break;
             case R.id.save:
-                System.out.println("Save Clicked!");
                 break;
         }
     }
