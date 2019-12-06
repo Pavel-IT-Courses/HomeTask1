@@ -26,6 +26,6 @@ public class CustomView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawCircle(50, 50, 80, new Paint());
+        canvas.drawCircle(200, 200, 80, new Paint());
     }
 }
