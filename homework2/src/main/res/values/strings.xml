@@ -10,4 +10,7 @@
     <string name="email">E-Mail:</string>
     <string name="back">Previous Page</string>
     <string name="browser">Open in Browser</string>
+    <string name="snack">Snack Bar</string>
+    <string name="toast">Toast</string>
+    <string name="info">Info Mode Selector</string>
 </resources>

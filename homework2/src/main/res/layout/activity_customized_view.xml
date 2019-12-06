@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+               android:orientation="vertical"
     tools:context=".view.CustomizedViewActivity">
+    <include
+        layout="@layout/toolbar_simple"
+        android:id="@+id/tb"
+    />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="start"
+              android:text="@string/snack"
+              android:textAppearance="@style/Toolbar.TitleText"
+              android:id="@+id/mode"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.SwitchCompat
+            android:text="@string/info"
+            android:id="@+id/switch_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="32dp"
+        />
+
+</LinearLayout>
