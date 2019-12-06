@@ -19,7 +19,7 @@ public class CustomView extends View {
         shape = new ShapeDrawable(new OvalShape());
         shape.setIntrinsicHeight(160);
         shape.setIntrinsicWidth(160);
-        shape.setBounds(new Rect(0, 0, 160, 160));
+        shape.setBounds(new Rect(0, 0, getWidth(), getHeight()));
     }
 
     @Override

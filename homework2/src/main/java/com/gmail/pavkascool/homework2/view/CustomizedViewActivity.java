@@ -49,7 +49,8 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.my_view:
                 Toast.makeText(this, "I clicked it!", Toast.LENGTH_LONG).show();
-                Snackbar.make(v, "AHAHA", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(v, "AHAHA x = " + v.getX() + " y = " + v.getY() + " width = " + v.getWidth() +
+                        " height = " + v.getHeight(), Snackbar.LENGTH_LONG).show();
         }
     }
 
