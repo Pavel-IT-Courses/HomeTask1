@@ -19,6 +19,7 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
     private TextView toolText, mode;
     private ImageButton backButton;
     private SwitchCompat switchButton;
+    private CustomView customView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
         backButton.setOnClickListener(this);
         switchButton = findViewById(R.id.switch_button);
         switchButton.setOnCheckedChangeListener(this);
+
+        customView = findViewById(R.id.my_view);
     }
 
     @Override

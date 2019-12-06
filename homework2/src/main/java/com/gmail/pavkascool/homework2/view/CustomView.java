@@ -2,6 +2,7 @@ package com.gmail.pavkascool.homework2.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import androidx.annotation.Nullable;
@@ -14,5 +15,6 @@ public class CustomView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        canvas.drawCircle(50, 50, 40, new Paint());
     }
 }
