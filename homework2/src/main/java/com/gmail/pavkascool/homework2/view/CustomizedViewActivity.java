@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import com.gmail.pavkascool.homework2.R;
+import com.google.android.material.snackbar.Snackbar;
 
 public class CustomizedViewActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -48,6 +49,7 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.my_view:
                 Toast.makeText(this, "I clicked it!", Toast.LENGTH_LONG).show();
+                Snackbar.make(v, "AHAHA", Snackbar.LENGTH_LONG).show();
         }
     }
 
