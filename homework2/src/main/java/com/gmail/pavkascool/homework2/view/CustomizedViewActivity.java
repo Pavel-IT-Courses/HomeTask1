@@ -37,6 +37,7 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
         switchButton.setOnCheckedChangeListener(this);
 
         customView = findViewById(R.id.my_view);
+        customView.setOnClickListener(this);
     }
 
     @Override
@@ -45,6 +46,8 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
             case R.id.tb_back:
                 onBackPressed();
                 break;
+            case R.id.my_view:
+                Toast.makeText(this, "I clicked it!", Toast.LENGTH_LONG).show();
         }
     }
 
