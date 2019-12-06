@@ -1,5 +1,6 @@
 package com.gmail.pavkascool.homework2.view;
 
+import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -40,34 +41,59 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
         switchButton.setOnCheckedChangeListener(this);
 
         customView = findViewById(R.id.my_view);
-        //customView.setOnClickListener(this);
+
         customView.setOnTouchListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.tb_back:
-                onBackPressed();
-                break;
-            case R.id.my_view:
-                Toast.makeText(this, "I clicked it!", Toast.LENGTH_LONG).show();
-
-        }
+        onBackPressed();
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Toast.makeText(this, "Отслеживание переключения: " + (isChecked ? "on" : "off"),
-                Toast.LENGTH_SHORT).show();
         String s = isChecked? getString(R.string.toast) : getString(R.string.snack);
         mode.setText(s);
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        Snackbar.make(v, "AHAHA x = " + event.getX() + " y = " + event.getY() + " width = " + v.getWidth() +
-                " height = " + v.getHeight(), Snackbar.LENGTH_LONG).show();
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float y = event.getY();
+            int w = ((CustomView)v).w;
+            int h = ((CustomView)v).h;
+            float radius = ((CustomView)v).radius;
+            float cX = x - w/2;
+            float cY = y - h/2;
+
+            float r = (float)Math.sqrt(cX*cX + cY*cY);
+            if(r > radius) {
+                return false;
+            }
+            if(r < radius/3) {
+                ((CustomView)v).shuffleColors();
+                v.invalidate();
+                return true;
+            }
+
+            if (!switchButton.isChecked()) {
+                int index = 0;
+                if(cX > 0 && cY > 0) index = 0;
+                if(cX < 0 && cY > 0) index = 1;
+                if(cX < 0 && cY < 0) index = 2;
+                if(cX > 0 && cY < 0) index = 3;
+                Snackbar snackbar = Snackbar.make(v, "x = " + x + ", y = " + y, Snackbar.LENGTH_LONG);
+                View snackbarView = snackbar.getView();
+                TextView tv = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+                tv.setTextColor(((CustomView)v).colors[index]);
+                snackbar.show();
+            }
+            else {
+                Toast.makeText(this, "x = " + x + ", y = " + y, Toast.LENGTH_LONG).show();
+            }
+        }
         return true;
     }
 }
