@@ -1,5 +1,6 @@
 package com.gmail.pavkascool.homework2.view;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -14,7 +15,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.gmail.pavkascool.homework2.R;
 import com.google.android.material.snackbar.Snackbar;
 
-public class CustomizedViewActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CustomizedViewActivity extends AppCompatActivity implements View.OnClickListener,
+        CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
     private Toolbar toolbar;
     private TextView toolText, mode;
@@ -38,7 +40,8 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
         switchButton.setOnCheckedChangeListener(this);
 
         customView = findViewById(R.id.my_view);
-        customView.setOnClickListener(this);
+        //customView.setOnClickListener(this);
+        customView.setOnTouchListener(this);
     }
 
     @Override
@@ -49,8 +52,7 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
                 break;
             case R.id.my_view:
                 Toast.makeText(this, "I clicked it!", Toast.LENGTH_LONG).show();
-                Snackbar.make(v, "AHAHA x = " + v.getX() + " y = " + v.getY() + " width = " + v.getWidth() +
-                        " height = " + v.getHeight(), Snackbar.LENGTH_LONG).show();
+
         }
     }
 
@@ -60,5 +62,12 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
                 Toast.LENGTH_SHORT).show();
         String s = isChecked? getString(R.string.toast) : getString(R.string.snack);
         mode.setText(s);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        Snackbar.make(v, "AHAHA x = " + event.getX() + " y = " + event.getY() + " width = " + v.getWidth() +
+                " height = " + v.getHeight(), Snackbar.LENGTH_LONG).show();
+        return true;
     }
 }
