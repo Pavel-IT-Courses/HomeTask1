@@ -29,7 +29,7 @@ public class CustomizedViewActivity extends AppCompatActivity implements View.On
         getSupportActionBar().setTitle("");
         mode = findViewById(R.id.mode);
         toolText = findViewById(R.id.tb_action);
-        toolText.setText("Customized View");
+        toolText.setText("Custom View");
         backButton = findViewById(R.id.tb_back);
         backButton.setOnClickListener(this);
         switchButton = findViewById(R.id.switch_button);
