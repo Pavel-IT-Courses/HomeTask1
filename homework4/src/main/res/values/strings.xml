@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">First Additional Module</string>
+    <string name="caps_off">caps off</string>
+    <string name="caps_on">CAPS ON</string>
+    <string name="mode">Choose caps off/on mode</string>
+    <string name="save">SAVE</string>
+
+</resources>

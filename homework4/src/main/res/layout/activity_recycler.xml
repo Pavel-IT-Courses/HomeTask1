@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:layout_marginTop="64dp"
+              android:id="@+id/edit"
+              android:text="@string/caps_off"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:layout_marginTop="32dp">
+<androidx.appcompat.widget.SwitchCompat
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_marginHorizontal="16dp"
+    android:id="@+id/switchcompat"
+    android:text="@string/mode"/>
+        <Button android:layout_width="0dp" android:layout_height="48dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/button"
+                android:layout_weight="1"
+                android:text="@string/save"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler"
+        android:orientation="vertical"/>
+
+
+
+</LinearLayout>

@@ -4,22 +4,24 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/class1" />
             <option value="$PROJECT_DIR$/class2" />
+            <option value="$PROJECT_DIR$/class3" />
+            <option value="$PROJECT_DIR$/class4" />
+            <option value="$PROJECT_DIR$/class5" />
+            <option value="$PROJECT_DIR$/emptymodule" />
             <option value="$PROJECT_DIR$/homework1" />
             <option value="$PROJECT_DIR$/homework2" />
+            <option value="$PROJECT_DIR$/homework3" />
+            <option value="$PROJECT_DIR$/homework4" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
