@@ -53,13 +53,13 @@ public class RecyclerActivity extends AppCompatActivity implements CompoundButto
 
     private class TextAdapter extends RecyclerView.Adapter<RecyclerActivity.TextHolder> {
 
-        public TextAdapter() {
+        TextAdapter() {
             data = new ArrayList<String>();
         }
 
         private List<String> data;
 
-        public void addItem(String s) {
+        private void addItem(String s) {
             data.add(s);
             notifyDataSetChanged();
         }
@@ -91,7 +91,7 @@ public class RecyclerActivity extends AppCompatActivity implements CompoundButto
 
         TextView textView;
 
-        public TextHolder(@NonNull View itemView) {
+        private TextHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.text);
         }
@@ -106,6 +106,8 @@ public class RecyclerActivity extends AppCompatActivity implements CompoundButto
     @Override
     public void onClick(View v) {
         String line = editText.getText().toString();
+        if(switchCompat.isChecked()) line = line.toUpperCase();
+        else line = line.toLowerCase();
         textAdapter.addItem(line);
         editText.setText("");
     }
