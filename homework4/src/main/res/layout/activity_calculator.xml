@@ -1,14 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CalculatorActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/display"
+        android:text="Calculator" />
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CalculatorActivity">
+        android:layout_marginTop="28dp">
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:gravity="center_horizontal"
-              android:text="Calculator"/>
+        <TableRow>
+
+            <Button
+                android:id="@+id/b0"
+                style="@style/ButtonStyle"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/b1"
+                style="@style/ButtonStyle"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/b2"
+                style="@style/ButtonStyle"
+                android:text="2" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/b3"
+                style="@style/ButtonStyle"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/b4"
+                style="@style/ButtonStyle"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/b5"
+                style="@style/ButtonStyle"
+                android:text="5" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/b6"
+                style="@style/ButtonStyle"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/b7"
+                style="@style/ButtonStyle"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/b8"
+                style="@style/ButtonStyle"
+                android:text="8" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/b9"
+                style="@style/ButtonStyle"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/plus"
+                style="@style/ButtonStyle"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/minus"
+                style="@style/ButtonStyle"
+                android:text="-" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/multiply"
+                style="@style/ButtonStyle"
+                android:text="*" />
+
+            <Button
+                android:id="@+id/divide"
+                style="@style/ButtonStyle"
+                android:text="/" />
+
+            <Button
+                android:id="@+id/equal"
+                style="@style/ButtonStyle"
+                android:text="=" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/back"
+                style="@style/ButtonStyle"
+                android:text="&lt;-" />
+
+            <Button
+                android:id="@+id/clear"
+                style="@style/ButtonStyle"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/point"
+                style="@style/ButtonStyle"
+                android:text="." />
+
+
+
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>
