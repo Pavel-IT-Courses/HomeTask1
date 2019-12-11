@@ -87,7 +87,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
 
-
         switch(v.getId()) {
 
             case R.id.b0:
