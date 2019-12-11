@@ -191,7 +191,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             case R.id.plus:
                 if(operation != null)  {
                     text = doOperation();
-                    Toast.makeText(this, "NULL!!!  OPERAND1 = " + operand1, Toast.LENGTH_SHORT).show();
                 }
                 setOperation("+");
                 break;
@@ -225,7 +224,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         if(text.isEmpty()) return;
         try {
             operand1 = Double.parseDouble(text);
-            Toast.makeText(this, "OPERAND1 = " + operand1, Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {
             Toast.makeText(this, "Wrong argument", Toast.LENGTH_SHORT).show();
