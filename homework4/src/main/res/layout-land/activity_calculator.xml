@@ -37,26 +37,23 @@
                 style="@style/ButtonStyle"
                 android:text="2" />
 
+            <Button
+                    android:id="@+id/b3"
+                    style="@style/ButtonStyle"
+                    android:text="3" />
+
+            <Button
+                    android:id="@+id/b4"
+                    style="@style/ButtonStyle"
+                    android:text="4" />
+
+            <Button
+                    android:id="@+id/b5"
+                    style="@style/ButtonStyle"
+                    android:text="5" />
+
         </TableRow>
 
-        <TableRow>
-
-            <Button
-                android:id="@+id/b3"
-                style="@style/ButtonStyle"
-                android:text="3" />
-
-            <Button
-                android:id="@+id/b4"
-                style="@style/ButtonStyle"
-                android:text="4" />
-
-            <Button
-                android:id="@+id/b5"
-                style="@style/ButtonStyle"
-                android:text="5" />
-
-        </TableRow>
 
         <TableRow>
 
@@ -75,26 +72,23 @@
                 style="@style/ButtonStyle"
                 android:text="8" />
 
+            <Button
+                    android:id="@+id/b9"
+                    style="@style/ButtonStyle"
+                    android:text="9" />
+
+            <Button
+                    android:id="@+id/plus"
+                    style="@style/ButtonStyle"
+                    android:text="+" />
+
+            <Button
+                    android:id="@+id/minus"
+                    style="@style/ButtonStyle"
+                    android:text="-" />
+
         </TableRow>
 
-        <TableRow>
-
-            <Button
-                android:id="@+id/b9"
-                style="@style/ButtonStyle"
-                android:text="9" />
-
-            <Button
-                android:id="@+id/plus"
-                style="@style/ButtonStyle"
-                android:text="+" />
-
-            <Button
-                android:id="@+id/minus"
-                style="@style/ButtonStyle"
-                android:text="-" />
-
-        </TableRow>
 
         <TableRow>
 
@@ -113,25 +107,20 @@
                 style="@style/ButtonStyle"
                 android:text="=" />
 
-        </TableRow>
-
-        <TableRow>
+            <Button
+                    android:id="@+id/back"
+                    style="@style/ButtonStyle"
+                    android:text="&lt;-" />
 
             <Button
-                android:id="@+id/back"
-                style="@style/ButtonStyle"
-                android:text="&lt;-" />
+                    android:id="@+id/clear"
+                    style="@style/ButtonStyle"
+                    android:text="C" />
 
             <Button
-                android:id="@+id/clear"
-                style="@style/ButtonStyle"
-                android:text="C" />
-
-            <Button
-                android:id="@+id/point"
-                style="@style/ButtonStyle"
-                android:text="." />
-
+                    android:id="@+id/point"
+                    style="@style/ButtonStyle"
+                    android:text="." />
 
 
         </TableRow>

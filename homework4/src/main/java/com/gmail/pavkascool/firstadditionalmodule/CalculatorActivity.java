@@ -1,10 +1,12 @@
 package com.gmail.pavkascool.firstadditionalmodule;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,18 +65,40 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         clear.setOnClickListener(this);
         point = findViewById(R.id.point);
         point.setOnClickListener(this);
+
+        if (savedInstanceState != null) {
+            operation = savedInstanceState.getString("operation", null);
+            operand1 = savedInstanceState.getDouble("operand1", 0);
+            text = savedInstanceState.getString("text");
+            newFigure = savedInstanceState.getBoolean("newFigure");
+            display.setText(text);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("operation", operation);
+        outState.putDouble("operand1", operand1);
+        outState.putString("text", text);
+        outState.putBoolean("newFigure", newFigure);
     }
 
     @Override
     public void onClick(View v) {
+
+
         switch(v.getId()) {
+
             case R.id.b0:
                 if(newFigure) {
                     text = new String();
                     newFigure = false;
                 }
+                if(text.startsWith("0") && !text.contains(".")) break;
                 text += "0";
                 break;
+
             case R.id.b1:
                 if(newFigure) {
                     text = new String();
@@ -82,6 +106,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "1";
                 break;
+
             case R.id.b2:
                 if(newFigure) {
                     text = new String();
@@ -89,6 +114,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "2";
                 break;
+
             case R.id.b3:
                 if(newFigure) {
                     text = new String();
@@ -96,6 +122,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "3";
                 break;
+
             case R.id.b4:
                 if(newFigure) {
                     text = new String();
@@ -103,6 +130,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "4";
                 break;
+
             case R.id.b5:
                 if(newFigure) {
                     text = new String();
@@ -110,6 +138,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "5";
                 break;
+
             case R.id.b6:
                 if(newFigure) {
                     text = new String();
@@ -117,6 +146,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "6";
                 break;
+
             case R.id.b7:
                 if(newFigure) {
                     text = new String();
@@ -124,6 +154,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "7";
                 break;
+
             case R.id.b8:
                 if(newFigure) {
                     text = new String();
@@ -131,6 +162,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "8";
                 break;
+
             case R.id.b9:
                 if(newFigure) {
                     text = new String();
@@ -138,30 +170,99 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 text += "9";
                 break;
+
             case R.id.point:
                 if(!text.contains(".")) text += ".";
                 break;
+
             case R.id.back:
                 text = text.substring(0, text.length() - 1);
                 break;
+
             case R.id.clear:
                 text = new String();
                 break;
+
             case R.id.equal:
-                if(operation == "+") {
-                    operand2 = Double.parseDouble(text);
-                    text = "" + (operand1 + operand2);
+                if(operation != null) {
+                    text = doOperation();
                 }
                 break;
+
             case R.id.plus:
-                if(operation == null) {
-                    operation = "+";
-                    operand1 = Double.parseDouble(text);
-                    newFigure = true;
+                if(operation != null)  {
+                    text = doOperation();
+                    Toast.makeText(this, "NULL!!!  OPERAND1 = " + operand1, Toast.LENGTH_SHORT).show();
                 }
+                setOperation("+");
+                break;
 
+            case R.id.minus:
+                if(operation != null)  {
+                    text = doOperation();
+                }
+                setOperation("-");
+                break;
 
+            case R.id.multiply:
+                if(operation != null)  {
+                    text = doOperation();
+                }
+                setOperation("*");
+                break;
+
+            case R.id.divide:
+                if(operation != null)  {
+                    text = doOperation();
+                }
+                setOperation("/");
+                break;
         }
         display.setText(text);
+    }
+
+    private void setOperation (String s) {
+        newFigure = true;
+        if(text.isEmpty()) return;
+        try {
+            operand1 = Double.parseDouble(text);
+            Toast.makeText(this, "OPERAND1 = " + operand1, Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Wrong argument", Toast.LENGTH_SHORT).show();
+        }
+        operation = s;
+
+    }
+
+    private String doOperation() {
+        try {
+            operand2 = Double.parseDouble(text);
+        } catch (Exception e) {
+            Toast.makeText(this, "Wrong argument", Toast.LENGTH_SHORT).show();
+        }
+        switch(operation) {
+            case "+":
+                operand1 += operand2;
+                break;
+            case "-":
+                operand1 -= operand2;
+                break;
+            case "*":
+                operand1 *= operand2;
+                break;
+            case "/":
+                try {
+                    operand1 /= operand2;
+                }
+                catch (Exception e) {
+                    Toast.makeText(this, "Illegal Operation", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+        operation = null;
+        newFigure = true;
+        text = "" + operand1;
+        return "" + operand1;
     }
 }
