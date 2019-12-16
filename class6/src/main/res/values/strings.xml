@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Text Editor</string>
+    <string name="save">SAVE</string>
+    <string name="last_visit">Last Session ended %d minutes ago</string>
+</resources>

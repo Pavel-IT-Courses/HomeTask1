@@ -1,2 +1,2 @@
-include ':homework1', ':homework4', ':class2', ':homework2', ':class3', ':class4', ':homework3', ':class5', ':emptymodule'
+include ':homework1', ':homework4', ':class2', ':homework2', ':class3', ':class4', ':homework3', ':class5', ':emptymodule', ':class6', ':faulty', ':homework5'
 rootProject.name='HomeTask1'

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Contact Book</string>
+    <string name="remove">REMOVE</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="empty">No contacts. Please add</string>
+    <string name="search">Search Contacts</string>
+    <string name="email">E-Mail</string>
+
+</resources>
