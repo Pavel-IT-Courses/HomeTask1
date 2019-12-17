@@ -3,6 +3,7 @@ package com.gmail.pavkas.homework5;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
     private EditText editName, editPhone;
     private RadioButton tel, mail;
+
+    PersonDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         tel.setOnClickListener(this);
         mail = findViewById(R.id.mail);
         mail.setOnClickListener(this);
+
+        db = App.getInstance().getDatabase();
     }
 
     @Override
@@ -50,7 +55,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 onBackPressed();
                 break;
             case R.id.save:
-
+                Person person = new Person();
+                person.setName(editName.getText().toString());
+                if(tel.isChecked()) person.setPhone(editPhone.getText().toString());
+                else person.setEmail(editPhone.getText().toString());
+                int adds = (int)db.personDao().insert(person);
+                Intent intent = new Intent();
+                setResult(adds, intent);
                 finish();
                 break;
             case R.id.tel:

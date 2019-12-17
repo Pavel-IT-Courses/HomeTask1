@@ -14,12 +14,15 @@ public interface PersonDao {
     @Query("SELECT * FROM person")
     List<Person> getAll();
 
+    @Query("SELECT * FROM person WHERE ID = :id")
+    Person getById(long id);
+
     @Insert
-    void insert(Person person);
+    long insert(Person person);
 
     @Update
-    void update(Person person);
+    int update(Person person);
 
     @Delete
-    void delete(Person person);
+    int delete(Person person);
 }

@@ -6,8 +6,16 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Person {
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @PrimaryKey(autoGenerate = true)
-    public long id;
+    private long id;
 
     private String name;
     private String email;
