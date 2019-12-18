@@ -14,11 +14,14 @@
             <option value="$PROJECT_DIR$/class3" />
             <option value="$PROJECT_DIR$/class4" />
             <option value="$PROJECT_DIR$/class5" />
+            <option value="$PROJECT_DIR$/class6" />
             <option value="$PROJECT_DIR$/emptymodule" />
+            <option value="$PROJECT_DIR$/faulty" />
             <option value="$PROJECT_DIR$/homework1" />
             <option value="$PROJECT_DIR$/homework2" />
             <option value="$PROJECT_DIR$/homework3" />
             <option value="$PROJECT_DIR$/homework4" />
+            <option value="$PROJECT_DIR$/homework5" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

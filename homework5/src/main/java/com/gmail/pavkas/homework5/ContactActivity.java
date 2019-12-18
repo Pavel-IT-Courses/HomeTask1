@@ -123,7 +123,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             else {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_phone, parent, false);
             }
-            v.setId(viewType);
+            v.setId((int)(persons.get(viewType).getId()));
             v.setOnClickListener(ContactActivity.this);
             return new PersonViewHolder(v);
         }

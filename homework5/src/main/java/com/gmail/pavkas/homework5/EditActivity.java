@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         db = App.getInstance().getDatabase();
         Intent intent = getIntent();
         int index = intent.getIntExtra("id", 0);
-        person = db.personDao().getById(index + 1);
+        person = db.personDao().getById(index);
         editName.setText(person.getName());
         if(person.getPhone() == null || person.getPhone().isEmpty()) {
             editPhone.setText(person.getEmail());
@@ -61,6 +61,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        int result = 0;
+        Intent intent = new Intent();
         switch(v.getId()) {
             case R.id.back:
                 onBackPressed();
@@ -75,16 +77,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 else {
                     newPerson.setPhone(editPhone.getText().toString());
                 }
-                int result = db.personDao().update(newPerson);
-                Intent intent = new Intent();
-                setResult(result, intent);
-                finish();
+                result = db.personDao().update(newPerson);
                 break;
             case R.id.remove:
-                int del = db.personDao().delete(person);
-                Intent intent1 = new Intent();
-                setResult(del, intent1);
-                finish();
+                result = db.personDao().delete(person);
+                break;
         }
+        setResult(result, intent);
+        finish();
     }
 }
