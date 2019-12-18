@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener {
@@ -35,30 +36,35 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private RecyclerView recyclerView;
     private PersonAdapter personAdapter;
     private TextView initText;
-    private GridLayout gridLayout;
-    private LinearLayout linearLayout;
     PersonDatabase db;
     private List<Person> persons;
 
-    private final int REQ_CODE_ADD = 1;
-    private final int REQ_CODE_EDIT = 2;
-    private final int TYPE_PHONE = 0;
-    private final int TYPE_MAIL = 1;
+    private final int REQ_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         toolbar.requestFocus();
 
         initText = findViewById(R.id.initial_text);
 
         searchView = findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-        linearLayout = findViewById(R.id.inner_layout);
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return true;
+            }
+        });
+
 
         db = App.getInstance().getDatabase();
         persons = db.personDao().getAll();
@@ -84,16 +90,16 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         Intent intent = null;
-        int reqCode = 0;
         if(v.getId() == R.id.fab) {
             intent = new Intent(this, AddActivity.class);
-            reqCode = REQ_CODE_ADD;
         }
         else {
             intent = new Intent(this, EditActivity.class);
-            intent.putExtra("id", v.getId());
+            int pos = recyclerView.getChildLayoutPosition(v);
+            int id = (int)(persons.get(pos).getId());
+            intent.putExtra("id", id);
         }
-        startActivityForResult(intent, reqCode);
+        startActivityForResult(intent, REQ_CODE);
     }
 
     @Override
@@ -101,6 +107,9 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode > 0) {
             persons = db.personDao().getAll();
+            for(Person p: persons) {
+                System.out.println(p.getId() + " " + p.getName() + " " + p.getPhone() + " " + p.getEmail());
+            }
             if(persons.size() > 0) {
                 initText.setText("");
             }
@@ -113,17 +122,20 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
     private class PersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+
+
         @NonNull
         @Override
         public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v = null;
+
             if(TextUtils.isEmpty(persons.get(viewType).getPhone())) {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_email, parent, false);
             }
             else {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_phone, parent, false);
             }
-            v.setId((int)(persons.get(viewType).getId()));
+            //v.setId((int)((persons.get(viewType)).getId()));
             v.setOnClickListener(ContactActivity.this);
             return new PersonViewHolder(v);
         }
@@ -139,8 +151,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public int getItemViewType(int position) {
             return position;
-//            if(TextUtils.isEmpty(persons.get(position).getEmail())) return TYPE_PHONE;
-//            else return TYPE_MAIL;
+
         }
 
         @Override

@@ -17,6 +17,9 @@ public interface PersonDao {
     @Query("SELECT * FROM person WHERE ID = :id")
     Person getById(long id);
 
+    @Query("DELETE FROM person")
+    void deleteAll();
+
     @Insert
     long insert(Person person);
 

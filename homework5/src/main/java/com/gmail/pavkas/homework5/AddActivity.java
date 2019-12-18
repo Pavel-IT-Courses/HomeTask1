@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,7 +53,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.back:
-                onBackPressed();
+                //onBackPressed();
+                db.personDao().deleteAll();
                 break;
             case R.id.save:
                 Person person = new Person();
@@ -62,6 +64,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 int adds = (int)db.personDao().insert(person);
                 Intent intent = new Intent();
                 setResult(adds, intent);
+                Toast.makeText(this, adds + " " + person.getId() + " " + person.getName() + " " + person.getPhone() + " " + person.getEmail(), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.tel:

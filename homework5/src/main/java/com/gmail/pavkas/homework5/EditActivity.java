@@ -12,8 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
-    private Person startPerson;
-    private Person endPerson;
+
 
     private ImageButton backButton;
     private ImageButton saveButton;
@@ -48,6 +47,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         int index = intent.getIntExtra("id", 0);
         person = db.personDao().getById(index);
+        System.out.println("person = " + person + " id = " + index);
         editName.setText(person.getName());
         if(person.getPhone() == null || person.getPhone().isEmpty()) {
             editPhone.setText(person.getEmail());
@@ -78,12 +78,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     newPerson.setPhone(editPhone.getText().toString());
                 }
                 result = db.personDao().update(newPerson);
+                setResult(result, intent);
+                finish();
                 break;
             case R.id.remove:
                 result = db.personDao().delete(person);
+                setResult(result, intent);
+                finish();
                 break;
         }
-        setResult(result, intent);
-        finish();
+
     }
 }
