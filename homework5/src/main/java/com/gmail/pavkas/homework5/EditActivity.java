@@ -18,7 +18,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton saveButton;
     private TextView toolText;
     private Toolbar toolbar;
-    private EditText editName, editPhone;
+    private EditText editName, editContact;
     private Button removeButton;
     private TextView contact;
     PersonDatabase db;
@@ -39,7 +39,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle("");
         toolText.setText("Edit Contact");
         editName = findViewById(R.id.edit_name);
-        editPhone = findViewById(R.id.edit_phone);
+        editContact = findViewById(R.id.edit_contact);
         removeButton = findViewById(R.id.remove);
         removeButton.setOnClickListener(this);
         contact = findViewById(R.id.contact);
@@ -49,12 +49,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         person = db.personDao().getById(index);
         System.out.println("person = " + person + " id = " + index);
         editName.setText(person.getName());
-        if(person.getPhone() == null || person.getPhone().isEmpty()) {
-            editPhone.setText(person.getEmail());
+        editContact.setText(person.getContact());
+        if(person.isHasEmail()) {
             contact.setText("E-Mail: ");
         }
         else {
-            editPhone.setText(person.getPhone());
             contact.setText("Phone: ");
         }
     }
@@ -70,13 +69,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.save:
                 Person newPerson = new Person();
                 newPerson.setId(person.getId());
+                newPerson.setHasEmail(person.isHasEmail());
                 newPerson.setName(editName.getText().toString());
-                if(person.getPhone() == null || person.getPhone().isEmpty()) {
-                    newPerson.setEmail(editPhone.getText().toString());
-                }
-                else {
-                    newPerson.setPhone(editPhone.getText().toString());
-                }
+                newPerson.setContact(person.getContact());
                 result = db.personDao().update(newPerson);
                 setResult(result, intent);
                 finish();

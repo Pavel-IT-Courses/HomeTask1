@@ -19,7 +19,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private TextView toolText, telOrMail;
     private Toolbar toolbar;
 
-    private EditText editName, editPhone;
+    private EditText editName, editContact;
     private RadioButton tel, mail;
 
     PersonDatabase db;
@@ -39,7 +39,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         getSupportActionBar().setTitle("");
         toolText.setText("Add Contact");
         editName = findViewById(R.id.edit_name);
-        editPhone = findViewById(R.id.edit_phone);
+        editContact = findViewById(R.id.edit_contact);
         telOrMail = findViewById(R.id.tel_mail);
         tel = findViewById(R.id.tel);
         tel.setOnClickListener(this);
@@ -53,18 +53,16 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.back:
-                //onBackPressed();
-                db.personDao().deleteAll();
+                onBackPressed();
                 break;
             case R.id.save:
                 Person person = new Person();
                 person.setName(editName.getText().toString());
-                if(tel.isChecked()) person.setPhone(editPhone.getText().toString());
-                else person.setEmail(editPhone.getText().toString());
+                person.setContact(editContact.getText().toString());
+                if(mail.isChecked()) person.setHasEmail(true);
                 int adds = (int)db.personDao().insert(person);
                 Intent intent = new Intent();
                 setResult(adds, intent);
-                Toast.makeText(this, adds + " " + person.getId() + " " + person.getName() + " " + person.getPhone() + " " + person.getEmail(), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.tel:

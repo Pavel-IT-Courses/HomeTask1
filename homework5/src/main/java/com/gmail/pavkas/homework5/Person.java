@@ -6,6 +6,15 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Person {
 
+
+
+    @PrimaryKey(autoGenerate = true)
+    private long id;
+
+    private String name;
+    private String contact;
+    private boolean hasEmail;
+
     public long getId() {
         return id;
     }
@@ -13,13 +22,6 @@ public class Person {
     public void setId(long id) {
         this.id = id;
     }
-
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-
-    private String name;
-    private String email;
-    private String phone;
 
     public String getName() {
         return name;
@@ -29,19 +31,19 @@ public class Person {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContact() {
+        return contact;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getPhone() {
-        return phone;
+    public boolean isHasEmail() {
+        return hasEmail;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setHasEmail(boolean hasEmail) {
+        this.hasEmail = hasEmail;
     }
 }

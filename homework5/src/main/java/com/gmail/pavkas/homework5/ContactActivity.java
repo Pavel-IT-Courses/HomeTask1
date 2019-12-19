@@ -1,5 +1,7 @@
 package com.gmail.pavkas.homework5;
 
+import android.graphics.drawable.Drawable;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +20,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -107,9 +105,6 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode > 0) {
             persons = db.personDao().getAll();
-            for(Person p: persons) {
-                System.out.println(p.getId() + " " + p.getName() + " " + p.getPhone() + " " + p.getEmail());
-            }
             if(persons.size() > 0) {
                 initText.setText("");
             }
@@ -127,15 +122,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         @NonNull
         @Override
         public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = null;
-
-            if(TextUtils.isEmpty(persons.get(viewType).getPhone())) {
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_email, parent, false);
-            }
-            else {
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_phone, parent, false);
-            }
-            //v.setId((int)((persons.get(viewType)).getId()));
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_person, parent, false);
             v.setOnClickListener(ContactActivity.this);
             return new PersonViewHolder(v);
         }
@@ -143,9 +130,21 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             PersonViewHolder personViewHolder = (PersonViewHolder)holder;
-            personViewHolder.nameView.setText(persons.get(position).getName());
-            if (personViewHolder.phoneView != null) personViewHolder.phoneView.setText(persons.get(position).getPhone());
-            else personViewHolder.emailView.setText(persons.get(position).getEmail());
+            Person p = persons.get(position);
+            personViewHolder.nameView.setText(p.getName());
+            String contactType;
+            int image;
+            if(p.isHasEmail()) {
+                contactType = "e-mail: ";
+                image = R.drawable.mail;
+            }
+            else {
+                contactType = "tel: ";
+                image = R.drawable.mail;
+            }
+            personViewHolder.contactView.setText(contactType + p.getContact());
+            personViewHolder.imageView.setImageResource(image);
+
         }
 
         @Override
@@ -162,13 +161,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
     private class PersonViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameView, phoneView, emailView;
+        TextView nameView, contactView;
+        ImageView imageView;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.name);
-            phoneView = itemView.findViewById(R.id.phone);
-            emailView = itemView.findViewById(R.id.email);
+            contactView = itemView.findViewById(R.id.contact);
+            imageView = itemView.findViewById(R.id.image);
         }
     }
 
