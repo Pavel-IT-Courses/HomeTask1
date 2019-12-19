@@ -1,9 +1,11 @@
 package com.gmail.pavkas.homework5;
 
+import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +40,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private List<Person> persons;
 
     private final int REQ_CODE = 1;
+
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,11 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
         floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Chose Action");
+        //TODO
+        dialog = builder.create();
 
     }
 
@@ -191,6 +200,5 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             imageView = itemView.findViewById(R.id.image);
         }
     }
-
 
 }
