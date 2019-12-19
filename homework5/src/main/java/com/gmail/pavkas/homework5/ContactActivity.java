@@ -58,7 +58,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                personAdapter.filter(newText);
                 return true;
             }
         });
@@ -76,7 +76,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView = findViewById(R.id.recycler);
         GridLayoutManager layoutManager = new GridLayoutManager(this, getResources().getConfiguration().orientation);
         recyclerView.setLayoutManager(layoutManager);
-        personAdapter = new PersonAdapter();
+        personAdapter = new PersonAdapter(persons);
         recyclerView.setAdapter(personAdapter);
 
 
@@ -117,7 +117,27 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
     private class PersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+        private List<Person> items;
 
+        PersonAdapter(List<Person> persons) {
+            items = new ArrayList<Person>(persons);
+        }
+
+        public void filter(String text) {
+            items.clear();
+            if(text.isEmpty()) {
+                items.addAll(persons);
+            }
+            else {
+                text = text.toLowerCase();
+                for(Person p: items) {
+                    if(p.getName().toLowerCase().contains(text)) {
+                        items.add(p);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
 
         @NonNull
         @Override
@@ -130,7 +150,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             PersonViewHolder personViewHolder = (PersonViewHolder)holder;
-            Person p = persons.get(position);
+            Person p = items.get(position);
             personViewHolder.nameView.setText(p.getName());
             String contactType;
             int image;
@@ -155,7 +175,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
         @Override
         public int getItemCount() {
-            return persons.size();
+            return items.size();
         }
     }
 
