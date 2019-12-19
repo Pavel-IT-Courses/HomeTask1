@@ -71,7 +71,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 newPerson.setId(person.getId());
                 newPerson.setHasEmail(person.isHasEmail());
                 newPerson.setName(editName.getText().toString());
-                newPerson.setContact(person.getContact());
+                newPerson.setContact(editContact.getText().toString());
                 result = db.personDao().update(newPerson);
                 setResult(result, intent);
                 finish();

@@ -1,7 +1,10 @@
 package com.gmail.pavkas.homework5;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +46,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     private final int REQ_CODE = 1;
 
     private AlertDialog dialog;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,26 +92,56 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chose Action");
-        //TODO
-        dialog = builder.create();
+        builder = new AlertDialog.Builder(this);
+
 
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+
         if(v.getId() == R.id.fab) {
-            intent = new Intent(this, AddActivity.class);
+            Intent intent = new Intent(this, AddActivity.class);
+            startActivityForResult(intent, REQ_CODE);
         }
         else {
-            intent = new Intent(this, EditActivity.class);
             int pos = recyclerView.getChildLayoutPosition(v);
-            int id = (int)(persons.get(pos).getId());
-            intent.putExtra("id", id);
+            final int id = (int) (personAdapter.items.get(pos).getId());
+            final String communicate, toWhom;
+            if(personAdapter.items.get(pos).isHasEmail()) {
+                communicate = "Mail";
+                toWhom = "mailto:" + personAdapter.items.get(pos).getContact();
+            }
+            else {
+                communicate = "Call";
+                toWhom = "tel:" + personAdapter.items.get(pos).getContact();
+            }
+            dialog = builder.setTitle("Chose Action").setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent data = new Intent(ContactActivity.this, EditActivity.class);
+                    data.putExtra("id", id);
+                    startActivityForResult(data, REQ_CODE);
+                }
+            }).setNegativeButton(communicate, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent data = new Intent(Intent.ACTION_VIEW, Uri.parse(toWhom));
+                    startActivity(data);
+                }
+            }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            }).create();
+            dialog.show();
+
+
         }
-        startActivityForResult(intent, REQ_CODE);
+
+
+
     }
 
     @Override
@@ -114,6 +149,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode > 0) {
             persons = db.personDao().getAll();
+            personAdapter.items = new ArrayList<Person>(persons);
             if(persons.size() > 0) {
                 initText.setText("");
             }
@@ -126,7 +162,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
     private class PersonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private List<Person> items;
+        List<Person> items;
 
         PersonAdapter(List<Person> persons) {
             items = new ArrayList<Person>(persons);
@@ -139,7 +175,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             }
             else {
                 text = text.toLowerCase();
-                for(Person p: items) {
+                for(Person p: persons) {
                     if(p.getName().toLowerCase().contains(text)) {
                         items.add(p);
                     }
@@ -163,16 +199,20 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             personViewHolder.nameView.setText(p.getName());
             String contactType;
             int image;
+            int color;
             if(p.isHasEmail()) {
                 contactType = "e-mail: ";
-                image = R.drawable.mail;
+                image = R.drawable.contact_mail;
+                color = Color.RED;
             }
             else {
                 contactType = "tel: ";
-                image = R.drawable.mail;
+                image = R.drawable.contact_phone;
+                color = Color.BLUE;
             }
             personViewHolder.contactView.setText(contactType + p.getContact());
             personViewHolder.imageView.setImageResource(image);
+            personViewHolder.imageView.setColorFilter(color);
 
         }
 
