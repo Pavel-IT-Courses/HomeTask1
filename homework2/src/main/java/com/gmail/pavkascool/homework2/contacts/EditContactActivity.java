@@ -26,6 +26,8 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
     private Button removeButton;
     private TextView contact;
 
+    PersonsHolder holder = MyApp.getPersonsHolder();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         int index = intent.getIntExtra("index", -1);
         if (index >= 0) {
-            startPerson = ContactBookActivity.persons.get(index);
+            startPerson = holder.get(index);
             endPerson = new Person();
             endPerson.setName((startPerson.getName()));
             endPerson.setPhone((startPerson.getPhone()));
@@ -83,12 +85,12 @@ public class EditContactActivity extends AppCompatActivity implements View.OnCli
                 else {
                     endPerson.setEmail(info);
                 }
-                ContactBookActivity.persons.remove(startPerson);
-                ContactBookActivity.persons.add(endPerson);
+                holder.remove(startPerson);
+                holder.add(endPerson);
                 finish();
                 break;
             case R.id.remove:
-                ContactBookActivity.persons.remove(startPerson);
+                holder.remove(startPerson);
                 finish();
                 break;
         }

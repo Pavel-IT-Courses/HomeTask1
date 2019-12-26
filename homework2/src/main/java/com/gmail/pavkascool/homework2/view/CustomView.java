@@ -9,16 +9,23 @@ import android.graphics.RectF;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Random;
 
 import androidx.annotation.Nullable;
 
-public class CustomView extends View {
+public class CustomView extends View implements View.OnTouchListener {
 
     public static int[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
     private static Random random = new Random();
+
+    private CustomListener customListener;
 
     private Paint paint;
     private RectF rect;
@@ -28,17 +35,12 @@ public class CustomView extends View {
     float radius;
 
 
-
-        public CustomView(Context context, @Nullable AttributeSet attrs) {
-            super(context, attrs);
-            shuffleColors();
-            paint = new Paint();
-            /*paint = new Paint();
-            w = getWidth();
-            h = getHeight();
-            radius = Math.min(w, h) / 3;
-            rect = new RectF(w/2 - radius, h/2 - radius, w/2 + radius, h/2 + radius);*/
-        }
+    public CustomView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        shuffleColors();
+        paint = new Paint();
+        setOnTouchListener(this);
+    }
 
 
     public void shuffleColors() {
@@ -56,14 +58,50 @@ public class CustomView extends View {
         w = getWidth();
         h = getHeight();
         radius = Math.min(w, h) / 3;
-        rect = new RectF(w/2 - radius, h/2 - radius, w/2 + radius, h/2 + radius);
+        rect = new RectF(w / 2 - radius, h / 2 - radius, w / 2 + radius, h / 2 + radius);
         for (int i = 0; i < colors.length; i++) {
             paint.setColor(colors[i]);
             canvas.drawArc(rect, i * 90, 90, true, paint);
         }
         paint.setColor(Color.GRAY);
-        canvas.drawCircle(w/2, h/2, radius / 3, paint);
+        canvas.drawCircle(w / 2, h / 2, radius / 3, paint);
 
 
     }
+
+
+    public void setCustomListener(CustomListener customListener) {
+        this.customListener = customListener;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            float x = event.getX();
+            float y = event.getY();
+            float cX = x - w / 2;
+            float cY = y - h / 2;
+
+            float r = (float) Math.sqrt(cX * cX + cY * cY);
+            if (r > radius) {
+                return false;
+            }
+            if (r < radius / 3) {
+                shuffleColors();
+                invalidate();
+                return true;
+            }
+
+            int index = 0;
+            if (cX > 0 && cY > 0) index = 0;
+            if (cX < 0 && cY > 0) index = 1;
+            if (cX < 0 && cY < 0) index = 2;
+            if (cX > 0 && cY < 0) index = 3;
+
+            customListener.onCustomTouchDown(this, index, x, y);
+        }
+        return true;
+    }
+
 }

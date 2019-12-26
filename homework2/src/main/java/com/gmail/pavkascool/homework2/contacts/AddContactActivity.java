@@ -44,9 +44,6 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
         editName = findViewById(R.id.edit_name);
         editPhone = findViewById(R.id.edit_phone);
         telOrMail = findViewById(R.id.tel_mail);
-        /*View radio = findViewById(R.id.radio);
-        tel = radio.findViewById(R.id.tel);
-        mail = radio.findViewById(R.id.mail);*/
         tel = findViewById(R.id.tel);
         tel.setOnClickListener(this);
         mail = findViewById(R.id.mail);
@@ -56,6 +53,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        PersonsHolder holder = MyApp.getPersonsHolder();
         switch(v.getId()) {
             case R.id.back:
                 onBackPressed();
@@ -69,7 +67,7 @@ public class AddContactActivity extends AppCompatActivity implements View.OnClic
                 else {
                     endPerson.setEmail(editPhone.getText().toString());
                 }
-                ContactBookActivity.persons.add(endPerson);
+                holder.add(endPerson);
                 finish();
                 break;
             case R.id.tel:

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ContactBookActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static List<Person> persons = new ArrayList<>();
+    //public static List<Person> persons = new ArrayList<>();
 
     private Toolbar toolbar;
     private SearchView searchView;
@@ -63,13 +63,16 @@ public class ContactBookActivity extends AppCompatActivity implements View.OnCli
 
         LayoutInflater li = getLayoutInflater();
 
-        if(persons.size() > 0) {
+        PersonsHolder holder = MyApp.getPersonsHolder();
+        System.out.println("MY APP: " + MyApp.getInstance());
+        System.out.println("HOLDER IS " + holder);
+        if(holder.size() > 0) {
             linearLayout.removeView(initText);
             gridLayout.removeAllViews();
-            for (int i = 0; i < persons.size(); i++) {
-                String name = persons.get(i).getName();
-                String phone = persons.get(i).getPhone();
-                String email = persons.get(i).getEmail();
+            for (int i = 0; i < holder.size(); i++) {
+                String name = holder.get(i).getName();
+                String phone = holder.get(i).getPhone();
+                String email = holder.get(i).getEmail();
                 View item = null;
                 if (phone != null && !phone.isEmpty()) {
                     item = li.inflate(R.layout.item_phone, gridLayout, false);
